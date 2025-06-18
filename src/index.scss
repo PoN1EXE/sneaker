@@ -1,0 +1,77 @@
+$primary-color: #22c55e;
+$secondary-color: #f3f4f6;
+$accent-color: #000000;
+$text-muted: #6b7280;
+
+$font-family-base: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Inter;
+  background-color: $secondary-color;
+  color: $accent-color;
+}
+
+.wrapper {
+  background: #ffffff;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 20px;
+  max-width: 1080px;
+  margin: 50px auto;
+}
+
+header {
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .headerLeft {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .headerRight {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  h1 {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  h3 {
+    margin: 0;
+  }
+
+  p {
+    font-size: 0.875rem;
+    color: $text-muted;
+    margin: 0;
+  }
+
+  .liked,
+  .cart,
+  .user {
+    margin-right: 1rem;
+    height: 18px;
+    width: 18px;
+  }
+
+  img {
+    height: 40px;
+    width: 40px;
+    margin-right: 1rem;
+  }
+
+  li {
+    display: inline;
+    margin-right: 10px;
+  }
+}
