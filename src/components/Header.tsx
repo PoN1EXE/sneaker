@@ -26,10 +26,17 @@ export const Header = () => {
           </li>
         </ul>
       </header>
+      <div>
+        <img src='/img/frog.png' className='bigPic' />
+      </div>
       <div className='content'>
         <h1>Все кроссовки</h1>
-        ....
-        <SneakerCard />
+        <div className='card-list'>
+          <SneakerCard />
+          <SneakerCard />
+          <SneakerCard />
+          <SneakerCard />
+        </div>
       </div>
     </div>
   )
