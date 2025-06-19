@@ -30,7 +30,19 @@ export const Header = () => {
         <img src='/img/frog.png' className='bigPic' />
       </div>
       <div className='content'>
-        <h1>Все кроссовки</h1>
+        <div style={{ marginLeft: '30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h1 style={{ marginLeft: '30px' }}>Все кроссовки</h1>
+          <input
+            type='text'
+            className='search-input'
+            placeholder='Поиск...'
+            style={{
+              backgroundImage: '/img/search.svg',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: '10px center',
+              paddingLeft: '40px',
+            }}></input>
+        </div>
         <div className='card-list'>
           <SneakerCard />
           <SneakerCard />
