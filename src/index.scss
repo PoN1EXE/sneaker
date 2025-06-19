@@ -5,6 +5,18 @@ $text-muted: #6b7280;
 
 $font-family-base: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -98,15 +110,28 @@ header {
   text-align: center;
 
   &__like-button {
-    background-color: #d3d3d3;
     position: absolute;
-    width: 32px;
-    height: 32px;
     top: 16px;
     left: 16px;
+
+    background: linear-gradient(270deg, #f6729e, #e02b52, #f190b7);
+    background-size: 600% 600%;
+    background-position: 0% 50%;
+    transition: background-position 0.5s ease, transform 0.3s ease;
+
     border: none;
     border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    animation: none;
+  }
+
+  &__like-button:hover {
+    animation: gradient-move 3s ease infinite;
   }
 
   &__image {
@@ -145,7 +170,11 @@ header {
   }
 
   &__add-button {
-    background-color: #9e9e9e;
+    background: linear-gradient(270deg, #22c55e, #16a34a, #4ade80);
+    background-size: 600% 600%;
+    background-position: 0% 50%;
+    transition: background-position 0.5s ease, transform 0.3s ease;
+
     border: none;
     border-radius: 8px;
     width: 32px;
@@ -154,6 +183,11 @@ header {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    animation: none;
+  }
+
+  &__add-button:hover {
+    animation: gradient-move 3s ease infinite;
   }
 }
 .card-list {
@@ -169,4 +203,10 @@ header {
   padding: 8px 12px;
   border-radius: 6px;
   border: 1px solid #ccc;
+}
+.button-image {
+  width: 16px;
+  height: 16px;
+  filter: brightness(3);
+  transition: filter 0.3s ease;
 }

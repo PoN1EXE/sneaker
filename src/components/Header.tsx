@@ -37,10 +37,11 @@ export const Header = () => {
             className='search-input'
             placeholder='Поиск...'
             style={{
-              backgroundImage: '/img/search.svg',
+              backgroundImage: 'url(/img/search.svg)',
               backgroundRepeat: 'no-repeat',
               backgroundPosition: '10px center',
               paddingLeft: '40px',
+              backgroundColor: '#ccc',
             }}></input>
         </div>
         <div className='card-list'>
