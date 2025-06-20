@@ -1,5 +1,6 @@
 import './../index.scss'
 import { SneakerCard } from './SneakerCard'
+import { sneakers } from './SneakerList'
 
 export const Header = () => {
   return (
@@ -45,10 +46,9 @@ export const Header = () => {
             }}></input>
         </div>
         <div className='card-list'>
-          <SneakerCard />
-          <SneakerCard />
-          <SneakerCard />
-          <SneakerCard />
+          {sneakers.map((sneaker) => (
+            <SneakerCard key={sneaker.id} sneaker={sneaker} />
+          ))}
         </div>
       </div>
     </div>
