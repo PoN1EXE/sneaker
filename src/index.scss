@@ -130,6 +130,27 @@ header {
     animation: none;
   }
 
+  &__del-button {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+
+    background: linear-gradient(270deg, #c91010, #c70f0f, #980a0a);
+    background-size: 600% 600%;
+    background-position: 0% 50%;
+    transition: background-position 0.5s ease, transform 0.3s ease;
+
+    border: none;
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    animation: none;
+  }
+
   &__like-button:hover {
     animation: gradient-move 3s ease infinite;
   }
@@ -209,4 +230,30 @@ header {
   height: 16px;
   filter: brightness(3);
   transition: filter 0.3s ease;
+}
+
+.button-cart {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgb(37, 197, 37);
+
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.button-image-cart {
+  margin-left: 14px;
+  width: 16px;
+  height: 16px;
+  filter: brightness(3);
+  transition: filter 0.3s ease;
+}
+
+.modal {
 }

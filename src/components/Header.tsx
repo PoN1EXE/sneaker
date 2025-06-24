@@ -1,8 +1,28 @@
 import './../index.scss'
+import { useState } from 'react'
+import { sneakers, type Sneaker } from './SneakerList'
 import { SneakerCard } from './SneakerCard'
-import { sneakers } from './SneakerList'
+import { ModalBar } from './ModalBar'
+import { CartButton } from './custom/CartButton'
 
 export const Header = () => {
+  const [modalBarIsOpen, setModalBarIsOpen] = useState(false)
+  const [cartItems, setCartItems] = useState<Sneaker[]>([])
+  const [cartCounter, setCartCounter] = useState(0)
+
+  const openModal = () => setModalBarIsOpen(true)
+  const closeModal = () => setModalBarIsOpen(false)
+
+  const handleAddToCart = (sneaker: Sneaker) => {
+    const newId = `cart-${cartCounter}`
+    setCartCounter((prev) => prev + 1)
+    setCartItems((prev) => [...prev, { ...sneaker, cartId: newId }])
+    setModalBarIsOpen(true)
+  }
+  const handleRemoveFromCart = (cartId: string) => {
+    setCartItems((prev) => prev.filter((item) => item.cartId !== cartId))
+  }
+
   return (
     <div className='wrapper'>
       <header>
@@ -15,8 +35,7 @@ export const Header = () => {
         </div>
         <ul className='headerRight'>
           <li>
-            <img src='/img/cart.svg' className='cart' />
-            <span>1000 руб. </span>
+            <CartButton onClick={openModal} />
           </li>
           <li>
             <img src='/img/liked.svg' className='liked' />
@@ -27,11 +46,25 @@ export const Header = () => {
           </li>
         </ul>
       </header>
+
+      <ModalBar
+        isOpen={modalBarIsOpen}
+        onClose={closeModal}
+        cartItems={cartItems}
+        onRemoveFromCart={handleRemoveFromCart}
+      />
+
       <div>
         <img src='/img/frog.png' className='bigPic' />
       </div>
       <div className='content'>
-        <div style={{ marginLeft: '30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div
+          style={{
+            marginLeft: '30px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
           <h1 style={{ marginLeft: '30px' }}>Все кроссовки</h1>
           <input
             type='text'
@@ -47,7 +80,7 @@ export const Header = () => {
         </div>
         <div className='card-list'>
           {sneakers.map((sneaker) => (
-            <SneakerCard key={sneaker.id} sneaker={sneaker} />
+            <SneakerCard key={sneaker.id} sneaker={sneaker} onAddToCart={handleAddToCart} />
           ))}
         </div>
       </div>

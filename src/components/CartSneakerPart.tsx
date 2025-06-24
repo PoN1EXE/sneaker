@@ -3,24 +3,20 @@ import type { Sneaker } from './SneakerList'
 
 export type Props = {
   sneaker: Sneaker
-  onAddToCart: (sneaker: Sneaker) => void
+  onRemoveFromCart: (id: number) => void
 }
 
-export const SneakerCard = ({ sneaker, onAddToCart }: Props) => {
+export const CartSneakerPart = ({ sneaker, onRemoveFromCart }: Props) => {
   return (
     <div className='card'>
-      <button className='card__like-button'>
-        <img src={'/img/like.svg'} alt='like' width={11} height={11} className='button-image' />
-      </button>
       <img className='card__image' src={sneaker.img} alt={sneaker.title} width={133} height={112} />
       <p className='card__description'>{sneaker.title}</p>
       <div className='card__footer'>
         <div className='card__price-info'>
-          <span className='card__price-label'>Цена:</span>
           <p className='card__price-value'>{sneaker.price}</p>
         </div>
-        <button className='card__add-button' onClick={() => onAddToCart(sneaker)}>
-          <img width={11} height={11} src='/img/Vector.svg' alt='add' className='button-image' />
+        <button className='card__del-button' onClick={() => onRemoveFromCart(sneaker.id)}>
+          <img width={11} height={11} src='/img/del.svg' alt='del' className='button-image' />
         </button>
       </div>
     </div>
