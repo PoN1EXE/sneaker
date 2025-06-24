@@ -2,11 +2,21 @@ import './../index.scss'
 import type { Sneaker } from './SneakerList'
 
 export type Props = {
-  sneaker: Sneaker
+  sneaker: Sneaker & { cartId?: string }
   onAddToCart: (sneaker: Sneaker) => void
+  onRemoveFromCart: (cartId: string) => void
+  isAdded: boolean
 }
 
-export const SneakerCard = ({ sneaker, onAddToCart }: Props) => {
+export const SneakerCard = ({ sneaker, onAddToCart, onRemoveFromCart, isAdded }: Props) => {
+  const handleAddClick = () => {
+    if (isAdded && sneaker.cartId) {
+      onRemoveFromCart(sneaker.cartId)
+    } else {
+      onAddToCart(sneaker)
+    }
+  }
+
   return (
     <div className='card'>
       <button className='card__like-button'>
@@ -19,8 +29,14 @@ export const SneakerCard = ({ sneaker, onAddToCart }: Props) => {
           <span className='card__price-label'>Цена:</span>
           <p className='card__price-value'>{sneaker.price}</p>
         </div>
-        <button className='card__add-button' onClick={() => onAddToCart(sneaker)}>
-          <img width={11} height={11} src='/img/Vector.svg' alt='add' className='button-image' />
+        <button className='card__add-button' onClick={handleAddClick}>
+          <img
+            width={11}
+            height={11}
+            src={isAdded ? '/img/accept.svg' : '/img/Vector.svg'}
+            alt='add'
+            className='button-image'
+          />
         </button>
       </div>
     </div>

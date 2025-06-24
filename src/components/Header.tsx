@@ -5,9 +5,11 @@ import { SneakerCard } from './SneakerCard'
 import { ModalBar } from './ModalBar'
 import { CartButton } from './custom/CartButton'
 
+type CartItem = Sneaker & { cartId: string }
+
 export const Header = () => {
   const [modalBarIsOpen, setModalBarIsOpen] = useState(false)
-  const [cartItems, setCartItems] = useState<Sneaker[]>([])
+  const [cartItems, setCartItems] = useState<CartItem[]>([])
   const [cartCounter, setCartCounter] = useState(0)
 
   const openModal = () => setModalBarIsOpen(true)
@@ -17,12 +19,10 @@ export const Header = () => {
     const newId = `cart-${cartCounter}`
     setCartCounter((prev) => prev + 1)
     setCartItems((prev) => [...prev, { ...sneaker, cartId: newId }])
-    setModalBarIsOpen(true)
   }
   const handleRemoveFromCart = (cartId: string) => {
     setCartItems((prev) => prev.filter((item) => item.cartId !== cartId))
   }
-
   return (
     <div className='wrapper'>
       <header>
@@ -79,9 +79,18 @@ export const Header = () => {
             }}></input>
         </div>
         <div className='card-list'>
-          {sneakers.map((sneaker) => (
-            <SneakerCard key={sneaker.id} sneaker={sneaker} onAddToCart={handleAddToCart} />
-          ))}
+          {sneakers.map((sneaker) => {
+            const cartItem = cartItems.find((item) => item.id === sneaker.id)
+            return (
+              <SneakerCard
+                key={sneaker.id}
+                sneaker={{ ...sneaker, cartId: cartItem?.cartId }}
+                onAddToCart={handleAddToCart}
+                onRemoveFromCart={handleRemoveFromCart}
+                isAdded={!!cartItem}
+              />
+            )
+          })}
         </div>
       </div>
     </div>
