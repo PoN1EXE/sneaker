@@ -16,6 +16,7 @@ export const Header = () => {
   const [liked, setLiked] = useState<Sneaker[]>([])
   const [cartCounter, setCartCounter] = useState(0)
   const [activeTab, setActiveTab] = useState('main')
+  const [input, setInput] = useState('')
 
   const openLikes = () => setActiveTab('likes')
   const openUser = () => setActiveTab('user')
@@ -23,6 +24,8 @@ export const Header = () => {
 
   const openModal = () => setModalBarIsOpen(true)
   const closeModal = () => setModalBarIsOpen(false)
+
+  const filtered = sneakers.filter((sneaker) => sneaker.title.toLowerCase().includes(input.toLowerCase()))
 
   const handleAddToCart = (sneaker: Sneaker) => {
     const newId = `cart-${cartCounter}`
@@ -92,6 +95,8 @@ export const Header = () => {
               }}>
               <h1 style={{ marginLeft: '30px' }}>Все кроссовки</h1>
               <input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
                 type='text'
                 className='search-input'
                 placeholder='Поиск...'
@@ -105,7 +110,7 @@ export const Header = () => {
               />
             </div>
             <div className='card-list'>
-              {sneakers.map((sneaker) => {
+              {filtered.map((sneaker) => {
                 const cartItem = cartItems.find((item) => item.id === sneaker.id)
                 return (
                   <SneakerCard
