@@ -23,19 +23,38 @@ export const ModalBar = ({ isOpen, onClose, cartItems, onRemoveFromCart, onCheck
         <h2>Корзина</h2>
 
         <div className='drawer__items'>
-          {cartItems.map((item) => (
-            <CartSneakerPart key={item.cartId} sneaker={item} onRemoveFromCart={() => onRemoveFromCart(item.cartId)} />
-          ))}
+          {cartItems.length > 0 ? (
+            cartItems.map((item) => (
+              <CartSneakerPart
+                key={item.cartId}
+                sneaker={item}
+                onRemoveFromCart={() => onRemoveFromCart(item.cartId)}
+              />
+            ))
+          ) : (
+            <div className='drawer__empty-cart'>
+              <img src='./img/box.svg' className='drawer__empty-image' />
+              <h2>Упс... Корзина пуста...</h2>
+              <p>Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.</p>
+              <button className='drawer__order-button' onClick={onClose}>
+                Вернуться назад
+              </button>
+            </div>
+          )}
         </div>
 
-        <div className='drawer__footer'>
-          <p>Итого:..........................{total} руб.</p>
-          <p>Налог 5%:.................. {tax.toFixed(2)} руб.</p>
-        </div>
+        {cartItems.length > 0 && (
+          <>
+            <div className='drawer__footer'>
+              <p>Итого:..........................{total} руб.</p>
+              <p>Налог 5%:.................. {tax.toFixed(2)} руб.</p>
+            </div>
 
-        <button className='drawer__order-button' onClick={onCheckout}>
-          Оформить заказ
-        </button>
+            <button className='drawer__order-button' onClick={onCheckout}>
+              Оформить заказ
+            </button>
+          </>
+        )}
       </div>
     </Modal>
   )
