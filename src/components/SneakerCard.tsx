@@ -6,9 +6,11 @@ export type Props = {
   onAddToCart: (sneaker: Sneaker) => void
   onRemoveFromCart: (cartId: string) => void
   isAdded: boolean
+  isLiked: boolean
+  onLike: () => void
 }
 
-export const SneakerCard = ({ sneaker, onAddToCart, onRemoveFromCart, isAdded }: Props) => {
+export const SneakerCard = ({ sneaker, onAddToCart, onRemoveFromCart, isAdded, onLike, isLiked }: Props) => {
   const handleAddClick = () => {
     if (isAdded && sneaker.cartId) {
       onRemoveFromCart(sneaker.cartId)
@@ -19,8 +21,14 @@ export const SneakerCard = ({ sneaker, onAddToCart, onRemoveFromCart, isAdded }:
 
   return (
     <div className='card'>
-      <button className='card__like-button'>
-        <img src={'/img/like.svg'} alt='like' width={11} height={11} className='button-image' />
+      <button className='card__like-button' onClick={onLike}>
+        <img
+          src={isLiked ? '/img/accept.svg' : '/img/like.svg'}
+          alt='like'
+          width={11}
+          height={11}
+          className='button-image'
+        />
       </button>
       <img className='card__image' src={sneaker.img} alt={sneaker.title} width={133} height={112} />
       <p className='card__description'>{sneaker.title}</p>

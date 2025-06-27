@@ -238,7 +238,7 @@ header {
   align-items: center;
   justify-content: center;
 
-  background: rgb(37, 197, 37);
+  background: rgba(37, 197, 37, 0.896);
 
   border: none;
   border-radius: 16px;
@@ -247,9 +247,9 @@ header {
 }
 
 .button-image-cart {
-  margin-left: 14px;
-  width: 16px;
-  height: 16px;
+  margin: auto;
+  width: auto;
+  height: auto;
   filter: brightness(3);
   transition: filter 0.3s ease;
 }

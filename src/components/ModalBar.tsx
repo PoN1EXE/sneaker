@@ -9,11 +9,12 @@ type ModalBarProps = {
   onClose: () => void
   cartItems: (Sneaker & { cartId: string })[]
   onRemoveFromCart: (cartId: string) => void
+  onCheckout: () => void
 }
 
 const parsePrice = (price: string) => Number(price.replace(/\s|руб\.?/g, ''))
 
-export const ModalBar = ({ isOpen, onClose, cartItems, onRemoveFromCart }: ModalBarProps) => {
+export const ModalBar = ({ isOpen, onClose, cartItems, onRemoveFromCart, onCheckout }: ModalBarProps) => {
   const total = cartItems.reduce((sum, item) => sum + parsePrice(item.price), 0)
   const tax = total * 0.05
   return (
@@ -32,7 +33,9 @@ export const ModalBar = ({ isOpen, onClose, cartItems, onRemoveFromCart }: Modal
           <p>Налог 5%:.................. {tax.toFixed(2)} руб.</p>
         </div>
 
-        <button className='drawer__order-button'>Оформить заказ</button>
+        <button className='drawer__order-button' onClick={onCheckout}>
+          Оформить заказ
+        </button>
       </div>
     </Modal>
   )
