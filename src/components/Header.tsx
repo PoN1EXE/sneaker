@@ -160,14 +160,27 @@ export const Header = () => {
       {activeTab === 'user' && (
         <div>
           <h2 style={{ margin: '30px' }}>Мои покупки</h2>
-          <div className='card-list'>
-            {orders.map((order) => (
-              <div className='card' key={order.Id}>
-                <img className='card__image' src={order.img} alt={order.title} style={{ width: 100, height: 'auto' }} />
-                <p>{order.title}</p> {order.price}
-              </div>
-            ))}
-          </div>
+          {orders.length === 0 ? (
+            <div className='emptyLiked'>
+              <img src='./img/sad.svg' className='emptyLikedImage' />
+              <h2>Покупок нет :(</h2>
+              <p>Оформите хотя бы один заказ.</p>
+            </div>
+          ) : (
+            <div className='card-list'>
+              {orders.map((order) => (
+                <div className='card' key={order.Id}>
+                  <img
+                    className='card__image'
+                    src={order.img}
+                    alt={order.title}
+                    style={{ width: 100, height: 'auto' }}
+                  />
+                  <p>{order.title}</p> {order.price}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>
