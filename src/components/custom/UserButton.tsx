@@ -1,6 +1,6 @@
 import './../../index.scss'
 
-type UserButtonProps = {
+interface UserButtonProps {
   onClick?: () => void
 }
 

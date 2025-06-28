@@ -1,4 +1,4 @@
-export type Sneaker = {
+export interface Sneaker {
   id: number
   img: string
   title: string

@@ -1,6 +1,6 @@
 import './../../index.scss'
 
-type CartButtonProps = {
+interface CartButtonProps {
   onClick?: () => void
 }
 

@@ -17,13 +17,17 @@ export const Header = () => {
   const [cartCounter, setCartCounter] = useState(0)
   const [activeTab, setActiveTab] = useState('main')
   const [input, setInput] = useState('')
+  const [isOrdered, setIsOrdered] = useState(false)
 
   const openLikes = () => setActiveTab('likes')
   const openUser = () => setActiveTab('user')
   const goHome = () => setActiveTab('main')
 
   const openModal = () => setModalBarIsOpen(true)
-  const closeModal = () => setModalBarIsOpen(false)
+  const closeModal = () => {
+    setModalBarIsOpen(false)
+    setIsOrdered(false)
+  }
 
   const filtered = sneakers.filter((sneaker) => sneaker.title.toLowerCase().includes(input.toLowerCase()))
 
@@ -39,6 +43,7 @@ export const Header = () => {
   const handleCheckout = () => {
     setOrders([...orders, ...cartItems])
     setCartItems([])
+    setIsOrdered(true)
   }
 
   const handleLike = (sneaker: Sneaker) => {
@@ -79,6 +84,7 @@ export const Header = () => {
         cartItems={cartItems}
         onRemoveFromCart={handleRemoveFromCart}
         onCheckout={handleCheckout}
+        isOrdered={isOrdered}
       />
       {activeTab === 'main' && (
         <>
@@ -132,14 +138,22 @@ export const Header = () => {
       {activeTab === 'likes' && (
         <div>
           <h2 style={{ margin: '30px' }}>Избранное</h2>
-          <div className='card-list'>
-            {liked.map((like) => (
-              <div className='card' key={like.id}>
-                <img className='card__image' src={like.img} alt={like.title} style={{ width: 100, height: 'auto' }} />
-                <p>{like.title}</p> {like.price}
-              </div>
-            ))}
-          </div>
+          {liked.length === 0 ? (
+            <div className='emptyLiked'>
+              <img src='./img/sad.svg' className='emptyLikedImage' />
+              <h2>Закладок нет :(</h2>
+              <p>Вы ничего не добавляли в закладки</p>
+            </div>
+          ) : (
+            <div className='card-list'>
+              {liked.map((like) => (
+                <div className='card' key={like.id}>
+                  <img className='card__image' src={like.img} alt={like.title} style={{ width: 100, height: 'auto' }} />
+                  <p>{like.title}</p> {like.price}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 

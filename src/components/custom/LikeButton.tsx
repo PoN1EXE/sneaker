@@ -1,6 +1,6 @@
 import './../../index.scss'
 
-type LikeButtonProps = {
+interface LikeButtonProps {
   onClick?: () => void
 }
 

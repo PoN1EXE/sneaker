@@ -1,7 +1,7 @@
 import './../index.scss'
 import type { Sneaker } from './SneakerList'
 
-export type Props = {
+export interface Props {
   sneaker: Sneaker
   onRemoveFromCart: (id: number) => void
 }

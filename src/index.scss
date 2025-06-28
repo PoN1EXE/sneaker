@@ -315,3 +315,22 @@ header {
   flex-direction: column;
   height: 100%;
 }
+
+.emptyLiked {
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  width: auto;
+  height: auto;
+  flex-direction: column;
+  display: flex;
+}
+.emptyLikedImage {
+  align-items: center;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  width: 100px;
+  height: 100px;
+  justify-content: center;
+}
