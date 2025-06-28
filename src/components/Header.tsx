@@ -115,7 +115,7 @@ export const Header = () => {
                 }}
               />
             </div>
-            <div className='card-list'>
+            <div className='cardList'>
               {filtered.map((sneaker) => {
                 const cartItem = cartItems.find((item) => item.id === sneaker.id)
                 return (
