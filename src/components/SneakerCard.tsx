@@ -1,7 +1,7 @@
 import './../index.scss'
 import type { Sneaker } from './SneakerList'
 
-export interface Props {
+export interface SneakerProps {
   sneaker: Sneaker & { cartId?: string }
   onAddToCart: (sneaker: Sneaker) => void
   onRemoveFromCart: (cartId: string) => void
@@ -10,7 +10,7 @@ export interface Props {
   onLike: () => void
 }
 
-export const SneakerCard = ({ sneaker, onAddToCart, onRemoveFromCart, isAdded, onLike, isLiked }: Props) => {
+export const SneakerCard = ({ sneaker, onAddToCart, onRemoveFromCart, isAdded, onLike, isLiked }: SneakerProps) => {
   const handleAddClick = () => {
     if (isAdded && sneaker.cartId) {
       onRemoveFromCart(sneaker.cartId)
