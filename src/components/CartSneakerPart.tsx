@@ -1,9 +1,12 @@
 import './../index.scss'
 import type { Sneaker } from './SneakerList'
 
+export interface CartItem extends Sneaker {
+  cartId: string
+}
 export interface Props {
-  sneaker: Sneaker
-  onRemoveFromCart: (id: number) => void
+  sneaker: CartItem
+  onRemoveFromCart: (cartId: string) => void
 }
 
 export const CartSneakerPart = ({ sneaker, onRemoveFromCart }: Props) => {
@@ -15,7 +18,7 @@ export const CartSneakerPart = ({ sneaker, onRemoveFromCart }: Props) => {
         <div className='card__price-info'>
           <p className='card__price-value'>{sneaker.price}</p>
         </div>
-        <button className='card__del-button' onClick={() => onRemoveFromCart(sneaker.id)}>
+        <button className='card__del-button' onClick={() => onRemoveFromCart(sneaker.cartId)}>
           <img width={11} height={11} src='/img/del.svg' alt='del' className='button-image' />
         </button>
       </div>

@@ -2,9 +2,9 @@ import './../index.scss'
 import type { Sneaker } from './SneakerList'
 
 export interface SneakerProps {
-  sneaker: Sneaker & { cartId?: string }
+  sneaker: Sneaker
   onAddToCart: (sneaker: Sneaker) => void
-  onRemoveFromCart: (cartId: string) => void
+  onRemoveFromCart: (sneakerId: number) => void
   isAdded: boolean
   isLiked: boolean
   onLike: () => void
@@ -12,8 +12,8 @@ export interface SneakerProps {
 
 export const SneakerCard = ({ sneaker, onAddToCart, onRemoveFromCart, isAdded, onLike, isLiked }: SneakerProps) => {
   const handleAddClick = () => {
-    if (isAdded && sneaker.cartId) {
-      onRemoveFromCart(sneaker.cartId)
+    if (isAdded) {
+      onRemoveFromCart(sneaker.id)
     } else {
       onAddToCart(sneaker)
     }

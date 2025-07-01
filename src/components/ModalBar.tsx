@@ -1,13 +1,17 @@
 import Modal from 'react-modal'
-import type { Sneaker } from './SneakerList'
 import { CartSneakerPart } from './CartSneakerPart'
+import type { Sneaker } from './SneakerList'
 
 Modal.setAppElement('#root')
+
+export type CartItem = Sneaker & {
+  cartId: string
+}
 
 interface ModalBarProps {
   isOpen: boolean
   onClose: () => void
-  cartItems: (Sneaker & { cartId: string })[]
+  cartItems: CartItem[]
   onRemoveFromCart: (cartId: string) => void
   onCheckout: () => void
   isOrdered: boolean
