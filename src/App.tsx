@@ -1,53 +1,26 @@
-import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { HeaderBar } from './components/HeaderBar'
 import { Home } from './components/pages/Home'
 import { Liked } from './components/pages/Liked'
 import { User } from './components/pages/User'
 import './index.scss'
-import type { Sneaker } from './components/SneakerList'
-
-type CartItem = Sneaker & { cartId: string }
+import { useShopState } from './components/hooks/useShopState'
 
 export const App = () => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([])
-  const [orders, setOrders] = useState<Sneaker[]>([])
-  const [liked, setLiked] = useState<Sneaker[]>([])
-  const [modalBarIsOpen, setModalBarIsOpen] = useState(false)
-  const [isOrdered, setIsOrdered] = useState(false)
-
-  const handleAddToCart = (sneaker: Sneaker) => {
-    if (!cartItems.some((item) => item.id === sneaker.id)) {
-      setCartItems((prev) => [...prev, { ...sneaker, cartId: `cart-${Date.now()}` }])
-    }
-  }
-
-  const handleRemoveFromCartBySneakerId = (sneakerId: number) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== sneakerId))
-  }
-
-  const handleRemoveFromCartByCartId = (cartId: string) => {
-    setCartItems((prev) => prev.filter((item) => item.cartId !== cartId))
-  }
-
-  const openModal = () => setModalBarIsOpen(true)
-  const closeModal = () => {
-    setModalBarIsOpen(false)
-    setIsOrdered(false)
-  }
-
-  const handleCheckout = () => {
-    setOrders((prev) => [...prev, ...cartItems])
-    setCartItems([])
-    setIsOrdered(true)
-  }
-
-  const handleLike = (sneaker: Sneaker) => {
-    setLiked((prev) =>
-      prev.some((item) => item.id === sneaker.id) ? prev.filter((item) => item.id !== sneaker.id) : [...prev, sneaker]
-    )
-  }
-
+  const {
+    cartItems,
+    orders,
+    liked,
+    modalBarIsOpen,
+    isOrdered,
+    handleAddToCart,
+    handleRemoveFromCartBySneakerId,
+    handleRemoveFromCartByCartId,
+    openModal,
+    closeModal,
+    handleCheckout,
+    handleLike,
+  } = useShopState()
   return (
     <div className='wrapper'>
       <Router>
