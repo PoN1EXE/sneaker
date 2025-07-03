@@ -47,7 +47,17 @@ export const App = () => {
                 />
               }
             />
-            <Route path='/liked' element={<Liked liked={liked} />} />
+            <Route
+              path='/liked'
+              element={
+                <Liked
+                  liked={liked}
+                  isAdded={(id) => cartItems.some((item) => item.id === id)}
+                  onAddToCart={handleAddToCart}
+                  onRemoveFromCart={handleRemoveFromCartBySneakerId}
+                />
+              }
+            />
             <Route path='/user' element={<User orders={orders} />} />
           </Routes>
         </main>
