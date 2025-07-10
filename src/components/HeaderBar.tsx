@@ -7,6 +7,8 @@ import type { Sneaker } from './SneakerList'
 
 type CartItem = Sneaker & { cartId: string }
 
+const parsePrice = (price: string) => Number(price.replace(/\s|руб\.?/g, ''))
+
 interface HeaderProps {
   isOrdered: boolean
   modalBarIsOpen: boolean
@@ -26,6 +28,8 @@ export const HeaderBar = ({
   onRemoveFromCart,
   onCheckout,
 }: HeaderProps) => {
+  const total = cartItems.reduce((sum, item) => sum + parsePrice(item.price), 0)
+
   return (
     <header className='headerLeft'>
       <Link to='/' className='headerLeft'>
@@ -37,6 +41,11 @@ export const HeaderBar = ({
       </Link>
 
       <ul className='headerRight'>
+        {cartItems.length > 0 && (
+          <li>
+            <h4>{total} руб.</h4>
+          </li>
+        )}
         <li>
           <CartButton onClick={onOpenModal} />
         </li>
@@ -58,6 +67,7 @@ export const HeaderBar = ({
         onRemoveFromCart={onRemoveFromCart}
         onCheckout={onCheckout}
         isOrdered={isOrdered}
+        total={total}
         cartItems={cartItems}
       />
     </header>

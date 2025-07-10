@@ -14,6 +14,7 @@ interface ModalBarProps {
   cartItems: CartItem[]
   onRemoveFromCart: (cartId: string) => void
   onCheckout: () => void
+  total: number
   isOrdered: boolean
 }
 
